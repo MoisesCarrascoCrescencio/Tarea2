@@ -10,7 +10,10 @@ def factorial(numero):
         return ("Ha ingresado un número negativo")
 
     elif (numero >= 1):
-        return numero
+        resultado = 1
+        for i in range(1, numero + 1):
+            resultado *= i
+        return resultado
         
     
 
