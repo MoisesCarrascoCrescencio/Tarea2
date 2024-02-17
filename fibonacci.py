@@ -22,3 +22,4 @@ def fibonacci(numero):
 print("Ingresa un número")
 numero = int(input())
 print(fibonacci(numero))
+
