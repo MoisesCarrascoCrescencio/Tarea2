@@ -12,12 +12,13 @@ def fibonacci(numero):
         return 1
 
     else:
-        pass
+        a = 0
+        b = 1
 
-
-
+        for _ in range(2, numero):
+            a, b = b, a + b
+        return b
 
 print("Ingresa un número")
-numero = input()
-numero = int(numero)
+numero = int(input())
 print(fibonacci(numero))
