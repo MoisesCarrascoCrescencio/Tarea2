@@ -1,55 +1,75 @@
 % Punto de entrada del programa
 eliza :- 
-    % Mensaje de bienvenida
-    writeln('Hola, mi nombre es Eliza, tu chatbot. Por favor, ingresa tu consulta usando solo minúsculas y sin punto al final:'),
-    % Lee la entrada del usuario
+    writeln('Hola, mi nombre es Eliza'),
     readln(Input),
-    % Llama a la función principal con la entrada del usuario
     eliza(Input), !.
 
-% Manejo de la entrada "adios" para terminar la conversación
 eliza(Input) :- 
     Input == ['adios'],
     % Mensaje de despedida
     writeln('Adios. Espero haberte podido ayudar.'), !.
 
-% Manejo de la entrada "adios." para terminar la conversación
-eliza(Input) :- 
-    Input == ['adios', '.'],
-    % Mensaje de despedida
-    writeln('Adios. Espero haberte podido ayudar.'), !.
-
 % Procesamiento general de la entrada del usuario
 eliza(Input) :- 
-    % Busca una coincidencia en las plantillas definidas
     template(Stim, Resp, IndStim), match(Stim, Input),
-    % Si se encuentra una coincidencia, se reemplaza con los datos adecuados
     replace0(IndStim, Input, 0, Resp, R),
-    % Se imprime la respuesta generada
     writeln(R),
-    % Se lee la siguiente entrada del usuario para continuar la conversación
     readln(Input1),
     eliza(Input1), !.
 
 % Plantillas que definen patrones de entrada y respuestas correspondientes
 template([eliza,  s(_), tiene, hijos, .], [flagfam], [1]).
 template([eliza, s(_), es, padre, de, s(_), .], [flagpar], [1,5]).
+template([eliza, s(_), es, madre, de, s(_), .], [flagmadre], [1,5]).
+template([eliza, s(_), es, hermano, de, s(_), .], [flaghermano], [1,5]).
+template([eliza, s(_), es, hermana, de, s(_), .], [flaghermana], [1,5]).
 template(_, ['Por favor, explica un poco más.'], []). 
 
 % Hechos sobre padres e hijos
-padre(juan, luis).         
-padre(juan, antonio).
-padre(luis, carlos). 
+padre(moises, moisesc).         
+padre(moises, monica).
+padre(moises, mariel). 
+padre(moises, jessica).
+
+% Hechos sobre madres e hijos
+madre(maribel, moisesc).
+madre(maribel, monica).
+madre(maribel, mariel).
+madre(maribel, jessica).
+
+% Hechos sobre hermanos y hermanas
+hermano(moisesc, monica).
+hermano(moisesc, mariel).
+hermano(moisesc, jessica).
+hermana(monica, moisesc).
+hermana(monica, mariel).
+hermana(monica, jessica).
+hermana(jessica, moisesc).
+hermana(jessica, monica).
+hermana(jessica, mariel).
 
 % Predicado para generar respuestas sobre la familia
 familia(X, R) :- 
-    findall(Y, padre(X, Y), Hijos),
+    findall(Y, (padre(X, Y); madre(X, Y)), Hijos),
     atomic_list_concat(Hijos, ', ', HijosStr),
-    format(atom(R), 'Si los  hijos de ~w es/son: ~w.', [X, HijosStr]).
+    format(atom(R), 'Los hijos de ~w son: ~w.', [X, HijosStr]).
 
-% Predicado para generar respuestas sobre relaciones de parentesco
-pariente(X,Y,R):- padre(X, Y), R = ['Yes', X, padre, de, Y].
-pariente(X,Y,R):- \+padre(X,Y), R = ['No', X, no, es, padre, de, Y].
+% Predicado para generar respuestas sobre relaciones de parentesco (padre, madre, hermano, hermana)
+pariente(flagpar, X, Y, R) :- 
+    (padre(X, Y), R = ['Sí,', X, 'es padre de', Y]);
+    (\+ padre(X, Y), R = ['No,', X, 'no es padre de', Y]).
+
+pariente(flagmadre, X, Y, R) :- 
+    (madre(X, Y), R = ['Sí,', X, 'es madre de', Y]);
+    (\+ madre(X, Y), R = ['No,', X, 'no es madre de', Y]).
+
+pariente(flaghermano, X, Y, R) :- 
+    (hermano(X, Y), R = ['Sí,', X, 'es hermano de', Y]);
+    (\+ hermano(X, Y), R = ['No,', X, 'no es hermano de', Y]).
+
+pariente(flaghermana, X, Y, R) :- 
+    (hermana(X, Y), R = ['Sí,', X, 'es hermana de', Y]);
+    (\+ hermana(X, Y), R = ['No,', X, 'no es hermana de', Y]).
 
 % Coincidencia de patrones (match)
 match([], []).
@@ -79,8 +99,7 @@ replace0([I, J], Input, _, Resp, R) :-
     nth0(I, Input, Atom),
     nth0(J, Input, Atom1),
     nth0(0, Resp, X),
-    X == flagpar,
-    pariente(Atom, Atom1, R).
+    pariente(X, Atom, Atom1, R).
 
 replace0([I|Index], Input, N, Resp, R) :- 
     length(Index, M), M =:= 0,
