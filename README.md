@@ -165,5 +165,53 @@ replace0([I|Index], Input, N, Resp, R) :-
  Este proceso se repite hasta que el usuario escribe "adios".
 
 
+## Introducción al Cáncer de riñon
+El cáncer de riñon es una enfermedad en la que las células del riñón comienzan a crecer de forma descontrolada, formando un tumor. Este puede crecer dentro del riñon o propagarse a otras partes del cuerpo. El cáncer de riñón puede ser causado por diferentes factores, como el tabaquismo, la obesidad, la hipertensión arterial y la exposición a cierto productos químicos.
+
+Los síntomas del cáncer de riñón pueden incluir sangre en la orina, dolor en el costado o la espalda, pérdida de peso sin razón aparante, cansancio y fiebre intermitente. Sin embargo, en las etapas tempranas, es posible que no haya síntomas.
+
+El tratamiento para el cáncer de riñon depende del tamaño y la etapa del tumor, así como de  la salud general del paciente. Puede incluir cirugía para extirpar el tumor, radioterapia, quimioterapia, terapia dirigida o inmunoterapia.
+
+Es importante detectar el cáncer de riñon en etapas tempranas, ya que esto puede mejorar las posibilidades de curación. Por eso, es importante estar 
+atento a cualquier síntoma y acudir al médico si se presenta alguno de ellos.
+
+Los alimentos que se pueden consumir si se tiene cáncer riñon son:
+1. Consumir una variedad de frutas y verduras.
+2. Limitar una variedad de grasas saturas y trans.
+3. Incluir proteínas magras.
+4. Limitar la ingesta de sodio.
+5. Beber suficiente agua.
+
+Los medicos que son especialistas en  el cancer de riñon son:
+1. Oncólogos
+2. Urologos
+
+## Introducción a la Malaria 
+La malaria es una enfermedad causada por parásitos que se transmiten a través de las picaduras de mosquitos infectados. Aunque la malaria es una enfermedad prevenible y tratable, sigue siendo un problema de salud importante en muchas partes del mundo, especialmente en regiones tropicales y subtropicales.
+
+Los síntomas de la malaria pueden incluir fiebre, escalofríos, sudoración, dolor de cabeza, dolor muscular y fatiga. En casos graves, la malaria puede causar complicaciones potencialmente mortales si no se trata adecuadamente, como anemia severa, problemas respiratorios o daños en los órganos.
+
+Si se sospecha de malaria, es imporntante buscar atención médica de inmediato. El diagnóstico temprano y el tratamiento oportuno son fundamentales para prevenir complicaciones graves. El médico puede realizar pruebas para confirmar el diagnóstico y recetar medicamentos antipalúdicos específicos.
+
+La prevención de la malaria incluye medidas para evitar las picaduras de mosquitos, como usar repelente de insectos, dormir bajo mosquiteros tratados con insecticida y tomar medicamentos preventivos si se viaja a áreas donde la malaria es endémica.
+
+La malaria se encuentra principalmente en regiones tropicales y subtropicales, especialmente en África subsahariana, el sudeste asiático, el este del mediterráneo y el pacífico occidental. Sin embargo, la enfermedad también puede estar presente en algunas partes de América del sur y central, así como en algunas islas del Pacífico.
+
+## Introducción a la Ladilla
+
+La ladilla, también conocida como piojo o pediculosis púbica, es una infestación parasitaria que afecta principalmente el área del vello púbico, aunque también puede encontrarse en otras áreas del cuerpo cubiertas de vello, como las axilas, el pecho, las piernas y la barba en los hombres. Es causada por el ácaro Phthirus pubis.
+
+Los síntomas de la ladilla incluyen pizacón intensa en el área afectada, irritación de la piel, presencia de pequeñas machas azul grisáceas o sangre en la piel debido a la alimentación de los ácaros y presencia de los propios ácaros o sus huevos en el vello púbico.
+
+Si se sospecha de una infección de ladillas, es importante buscar atención médica para confirmar el diagnóstico y recibir el tratamiento adecuado. El médico puede recetar medicamentos tópicos o en algunos casos, medicamentos orales para tratar la infección.
+
+Los médicos que pueden tratar la ladilla incluyen dertmatólogos, médicos de atención primaria u otros profesionales de la salud.
+
+La prevención de la ladilla incluyen evitar el contacto directo con personas infestadas y mantener una buena higiene personal. También es importante lavar la ropa de cama, toallas y ropa interior en agua caliente y secar en secadora a alta temperatura si se sospecha de una infección.
+
+
+
+
+
 
 
