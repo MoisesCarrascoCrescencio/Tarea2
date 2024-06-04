@@ -23,6 +23,10 @@ template([eliza, s(_), es, padre, de, s(_), .], [flagpar], [1,5]).
 template([eliza, s(_), es, madre, de, s(_), .], [flagmadre], [1,5]).
 template([eliza, s(_), es, hermano, de, s(_), .], [flaghermano], [1,5]).
 template([eliza, s(_), es, hermana, de, s(_), .], [flaghermana], [1,5]).
+template([eliza, s(_), es, primo, de, s(_), .], [flagprimo], [1,5]).
+template([eliza, s(_), es, tio, de, s(_), .], [flagtio], [1,5]).
+template([eliza, s(_), es, abuelo, de, s(_), .], [flagabuelo], [1,5]).
+template([eliza, s(_), es, abuela, de, s(_), .], [flagabuela], [1,5]).
 template(_, ['Por favor, explica un poco más.'], []). 
 
 % Hechos sobre padres e hijos
@@ -47,6 +51,67 @@ hermana(monica, jessica).
 hermana(jessica, moisesc).
 hermana(jessica, monica).
 hermana(jessica, mariel).
+hermana(mariel, moisesc).
+hermana(mariel, monica).
+hermana(mariel, jessica).
+
+% Hechos sobre primos
+primo(moisesc, fernanda).
+primo(moisesc, marcela).
+primo(moisesc, kevin).
+primo(moisesc, ciro).
+primo(moisesc, daniela).
+primo(moisesc, alondra).
+primo(monica, fernanda).
+primo(monica, marcela).
+primo(monica, kevin).
+primo(monica, ciro).
+primo(monica, daniela).
+primo(monica, alondra).
+primo(mariel, fernanda).
+primo(mariel, marcela).
+primo(mariel, kevin).
+primo(mariel, ciro).
+primo(mariel, daniela).
+primo(mariel, alondra).
+primo(jessica, fernanda).
+primo(jessica, marcela).
+primo(jessica, kevin).
+primo(jessica, ciro).
+primo(jessica, daniela).
+primo(jessica, alondra).
+
+% Hechos sobre tíos
+tio(vanesa, moisesc).
+tio(vanesa, monica).
+tio(vanesa, mariel).
+tio(vanesa, jessica).
+tio(lupe, moisesc).
+tio(lupe, monica).
+tio(lupe, mariel).
+tio(lupe, jessica).
+tio(violeta, moisesc).
+tio(violeta, monica).
+tio(violeta, mariel).
+tio(violeta, jessica).
+
+% Hechos sobre abuelos
+abuelo(joaquin, moisesc).
+abuelo(joaquin, monica).
+abuelo(joaquin, mariel).
+abuelo(joaquin, jessica).
+abuelo(carmen, moisesc).
+abuelo(carmen, monica).
+abuelo(carmen, mariel).
+abuelo(carmen, jessica).
+abuelo(isabel, moisesc).
+abuelo(isabel, monica).
+abuelo(isabel, mariel).
+abuelo(isabel, jessica).
+abuelo(ciro, moisesc).
+abuelo(ciro, monica).
+abuelo(ciro, mariel).
+abuelo(ciro, jessica).
 
 % Predicado para generar respuestas sobre la familia
 familia(X, R) :- 
@@ -54,7 +119,7 @@ familia(X, R) :-
     atomic_list_concat(Hijos, ', ', HijosStr),
     format(atom(R), 'Los hijos de ~w son: ~w.', [X, HijosStr]).
 
-% Predicado para generar respuestas sobre relaciones de parentesco (padre, madre, hermano, hermana)
+% Predicado para generar respuestas sobre relaciones de parentesco (padre, madre, hermano, hermana, primo, tio, abuelo, abuela)
 pariente(flagpar, X, Y, R) :- 
     (padre(X, Y), R = ['Sí,', X, 'es padre de', Y]);
     (\+ padre(X, Y), R = ['No,', X, 'no es padre de', Y]).
@@ -70,6 +135,22 @@ pariente(flaghermano, X, Y, R) :-
 pariente(flaghermana, X, Y, R) :- 
     (hermana(X, Y), R = ['Sí,', X, 'es hermana de', Y]);
     (\+ hermana(X, Y), R = ['No,', X, 'no es hermana de', Y]).
+
+pariente(flagprimo, X, Y, R) :- 
+    (primo(X, Y), R = ['Sí,', X, 'es primo de', Y]);
+    (\+ primo(X, Y), R = ['No,', X, 'no es primo de', Y]).
+
+pariente(flagtio, X, Y, R) :- 
+    (tio(X, Y), R = ['Sí,', X, 'es tío de', Y]);
+    (\+ tio(X, Y), R = ['No,', X, 'no es tío de', Y]).
+
+pariente(flagabuelo, X, Y, R) :- 
+    (abuelo(X, Y), R = ['Sí,', X, 'es abuelo de', Y]);
+    (\+ abuelo(X, Y), R = ['No,', X, 'no es abuelo de', Y]).
+
+pariente(flagabuela, X, Y, R) :- 
+    (abuelo(X, Y), R = ['Sí,', X, 'es abuela de', Y]);
+    (\+ abuelo(X, Y), R = ['No,', X, 'no es abuela de', Y]).
 
 % Coincidencia de patrones (match)
 match([], []).
