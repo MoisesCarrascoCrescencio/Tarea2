@@ -27,7 +27,19 @@ template([eliza, s(_), es, primo, de, s(_), .], [flagprimo], [1,5]).
 template([eliza, s(_), es, tio, de, s(_), .], [flagtio], [1,5]).
 template([eliza, s(_), es, abuelo, de, s(_), .], [flagabuelo], [1,5]).
 template([eliza, s(_), es, abuela, de, s(_), .], [flagabuela], [1,5]).
+template([eliza, tengo, X], [R], []) :-
+    sintoma(X, Enfermedad),
+    atom_concat('Tienes ', Enfermedad, R1),
+    atom_concat(R1, '.', R).
+
 template(_, ['Por favor, explica un poco más.'], []). 
+
+sintoma(tos, otra_enfermedad).
+sintoma(tos, fiebre).
+sintoma(calor, fiebre).
+sintoma(sangre_en_cuello, muerte).
+sintoma(tos, otra_enfermedad).
+
 
 % Hechos sobre padres e hijos
 padre(moises, moisesc).         
