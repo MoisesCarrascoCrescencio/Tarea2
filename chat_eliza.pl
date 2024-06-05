@@ -18,39 +18,16 @@ eliza(Input) :-
     eliza(Input1), !.
 
 % Plantillas que definen patrones de entrada y respuestas correspondientes
-template([eliza, s(_), tiene, hijos, .], [flagfam], [1]).
-template([eliza, s(_), es, padre, de, s(_), .], [flagpar], [1, 5]).
-template([eliza, s(_), es, madre, de, s(_), .], [flagmadre], [1, 5]).
-template([eliza, s(_), es, hermano, de, s(_), .], [flaghermano], [1, 5]).
-template([eliza, s(_), es, hermana, de, s(_), .], [flaghermana], [1, 5]).
-template([eliza, s(_), es, primo, de, s(_), .], [flagprimo], [1, 5]).
-template([eliza, s(_), es, tio, de, s(_), .], [flagtio], [1, 5]).
-template([eliza, s(_), es, abuelo, de, s(_), .], [flagabuelo], [1, 5]).
-template([eliza, s(_), es, abuela, de, s(_), .], [flagabuela], [1, 5]).
-template([eliza, es, un, pokemon, s(Nombre), .], [flagpokemon], [4]).
-template(_, ['Por favor, explica un poco más.'], []).
-
-% Hechos sobre los Pokémon
-pokemon(bulbasaur).
-pokemon(ivysaur).
-pokemon(venusaur).
-pokemon(charmander).
-pokemon(charmeleon).
-pokemon(charizard).
-pokemon(squirtle).
-pokemon(wartortle).
-pokemon(blastoise).
-pokemon(pikachu).
-pokemon(raichu).
-pokemon(jigglypuff).
-pokemon(wigglytuff).
-pokemon(zubat).
-pokemon(golbat).
-pokemon(oddish).
-pokemon(gloom).
-pokemon(vileplume).
-pokemon(diglett).
-pokemon(dugtrio).
+template([eliza,  s(_), tiene, hijos, .], [flagfam], [1]).
+template([eliza, s(_), es, padre, de, s(_), .], [flagpar], [1,5]).
+template([eliza, s(_), es, madre, de, s(_), .], [flagmadre], [1,5]).
+template([eliza, s(_), es, hermano, de, s(_), .], [flaghermano], [1,5]).
+template([eliza, s(_), es, hermana, de, s(_), .], [flaghermana], [1,5]).
+template([eliza, s(_), es, primo, de, s(_), .], [flagprimo], [1,5]).
+template([eliza, s(_), es, tio, de, s(_), .], [flagtio], [1,5]).
+template([eliza, s(_), es, abuelo, de, s(_), .], [flagabuelo], [1,5]).
+template([eliza, s(_), es, abuela, de, s(_), .], [flagabuela], [1,5]).
+template(_, ['Por favor, explica un poco más.'], []). 
 
 % Hechos sobre padres e hijos
 padre(moises, moisesc).         
@@ -164,8 +141,8 @@ pariente(flagprimo, X, Y, R) :-
     (\+ primo(X, Y), R = ['No,', X, 'no es primo de', Y]).
 
 pariente(flagtio, X, Y, R) :- 
-    (tio(X, Y), R = ['Sí,', X, 'es tio de', Y]);
-    (\+ tio(X, Y), R = ['No,', X, 'no es tio de', Y]).
+    (tio(X, Y), R = ['Sí,', X, 'es tío de', Y]);
+    (\+ tio(X, Y), R = ['No,', X, 'no es tío de', Y]).
 
 pariente(flagabuelo, X, Y, R) :- 
     (abuelo(X, Y), R = ['Sí,', X, 'es abuelo de', Y]);
@@ -175,21 +152,44 @@ pariente(flagabuela, X, Y, R) :-
     (abuelo(X, Y), R = ['Sí,', X, 'es abuela de', Y]);
     (\+ abuelo(X, Y), R = ['No,', X, 'no es abuela de', Y]).
 
-% Predicado para generar respuestas sobre si algo es un Pokémon
-pariente(flagpokemon, _, X, R) :-
-    nth0(0, X, Nombre),
-    (pokemon(Nombre) -> R = ['Sí,', Nombre, 'es un Pokémon.'] ; R = ['No,', Nombre, 'no es un Pokémon.']).
-
-% Predicados auxiliares para el procesamiento de las plantillas y entradas
+% Coincidencia de patrones (match)
 match([], []).
-match([H|T], [H|T2]) :-
-    match(T, T2).
-match([s(X)|T], [H|T2]) :- 
-    X = H,
-    match(T, T2).
+match([], _) :- true.
 
-replace0([], X, _, R, R).
-replace0([I|T], X, Index, [H|T2], R) :- 
-    nth0(I, X, H),
-    Index1 is Index + 1,
-    replace0(T, X, Index1, T2, R).
+match([S|Stim], [I|Input]) :- 
+    atom(S), % si I es un s(X) devuelve falso
+    S == I,
+    match(Stim, Input), !.
+
+match([S|Stim], [_|Input]) :- 
+    % I es un s(X), lo ignoro y continúo con el resto de la lista
+    \+ atom(S),
+    match(Stim, Input), !.
+
+% Reemplazo en las respuestas (replace0)
+replace0([], _, _, Resp, R) :- 
+    append(Resp, [], R), !.
+
+replace0([I|_], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+    nth0(0, Resp, X),
+    X == flagfam,
+    familia(Atom, R).
+
+replace0([I, J], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+    nth0(J, Input, Atom1),
+    nth0(0, Resp, X),
+    pariente(X, Atom, Atom1, R).
+
+replace0([I|Index], Input, N, Resp, R) :- 
+    length(Index, M), M =:= 0,
+    nth0(I, Input, Atom),
+    select(N, Resp, Atom, R1), append(R1, [], R), !.
+
+replace0([I|Index], Input, N, Resp, R) :- 
+    nth0(I, Input, Atom),
+    length(Index, M), M > 0,
+    select(N, Resp, Atom, R1),
+    N1 is N + 1,
+    replace0(Index, Input, N1, R1, R), !.
