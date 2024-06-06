@@ -62,6 +62,12 @@ template([eliza, que, puedo, hacer, para, prevenir, Enfermedad], [R], []) :-
     atom_concat(R2, Enfermedad, R3),
     atom_concat(R3, '.', R).
 
+template([eliza, en, que, region, puedo, contagiarme, de, Enfermedad], [R], []) :-
+    region(Enfermedad, Region),
+    atom_concat('Puedes contagiarte de ', Enfermedad, R1),
+    atom_concat(R1, ' en ', R2),
+    atom_concat(R2, Region, R3),
+    atom_concat(R3, '.', R).
 
 
 
@@ -116,7 +122,11 @@ prevencion(cancer_de_rinon, 'no hay nada para prevenirlo').
 prevencion(malaria, 'evitar picaduras de mosquitos').
 prevencion(ladilla, 'mantener relaciones sexuales seguras').
 
+% region
 
+region(cancer_de_rinon,'no hay regiones especificas').
+region(malaria,'regiones tropicales, subtropicales, africa, sudeste asiatico, este mediterraneo y pacifico occidental').
+region(ladilla,'no hay regiones especificas').
 
 
 % Hechos sobre padres e hijos
