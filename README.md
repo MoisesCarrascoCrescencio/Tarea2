@@ -210,8 +210,124 @@ Los médicos que pueden tratar la ladilla incluyen dertmatólogos, médicos de a
 La prevención de la ladilla incluyen evitar el contacto directo con personas infestadas y mantener una buena higiene personal. También es importante lavar la ropa de cama, toallas y ropa interior en agua caliente y secar en secadora a alta temperatura si se sospecha de una infección.
 
 
+## Patrones de entrada definidos para las enfermedades
+
+```
+
+template([eliza, tengo, X], [R], []) :-
+    sintoma(X, Enfermedad),
+    atom_concat('Tienes ', Enfermedad, R1),
+    atom_concat(R1, '.', R).
+
+template([eliza, cual, es, el, tratamiento, para, Enfermedad], [R], []) :-
+    tratamiento(Enfermedad, Tratamiento),
+    atom_concat('El tratamiento para ', Enfermedad, R1),
+    atom_concat(R1, ' es ', R2),
+    atom_concat(R2, Tratamiento, R3),
+    atom_concat(R3, '.', R).
+
+
+template([eliza, que, puedo, comer, si, tengo, Enfermedad], [R], []) :-
+    alimentacion(Enfermedad, Alimento),
+    atom_concat('', Alimento, R1),
+    atom_concat(R1, ' si tienes ', R2),
+    atom_concat(R2, Enfermedad, R3),
+    atom_concat(R3, '.', R).
+
+template([eliza, que, medico, me, puede, atender, si, tengo, Enfermedad], [R], []) :-
+    medico(Enfermedad, Medico),
+    atom_concat('El médico que te puede atender si tienes ', Enfermedad, R1),
+    atom_concat(R1, ' es un ', R2),
+    atom_concat(R2, Medico, R3),
+    atom_concat(R3, '.', R).
+
+template([eliza, que, puedo, hacer, para, prevenir, Enfermedad], [R], []) :-
+    prevencion(Enfermedad, Medida),
+    atom_concat('', Medida, R1),
+    atom_concat(R1, ' para prevenir ', R2),
+    atom_concat(R2, Enfermedad, R3),
+    atom_concat(R3, '.', R).
+
+template([eliza, en, que, region, puedo, contagiarme, de, Enfermedad], [R], []) :-
+    region(Enfermedad, Region),
+    atom_concat('Puedes contagiarte de ', Enfermedad, R1),
+    atom_concat(R1, ' en ', R2),
+    atom_concat(R2, Region, R3),
+    atom_concat(R3, '.', R).
+
+template([eliza, que, es, Enfermedad], [R], []) :-
+    explicacion(Enfermedad, Explicacion),
+    atom_concat(Explicacion, '.', R).
 
 
 
+template(_, ['Por favor, explica un poco más.'], []). 
+
+
+```
+## Hechos sobre enfermedades
+
+```
+% sintomas del cancer
+sintoma(sangre_en_la_orina, 'cancer de rinon').
+sintoma(dolor_en_la_zona_lumbar, 'cancer de rinon').
+sintoma(dolor_de_espalda, 'cancer de rinon').
+sintoma(perdida_de_peso, 'cancer de rinon').
+sintoma(cansancio, 'cancer de rinon').
+
+% sintomas de malaria
+sintoma(fiebre, 'malaria').
+sintoma(escalofrios, 'malaria').
+sintoma(sudoracion, 'malaria').
+sintoma(dolor_de_cabeza, 'malaria').
+sintoma(dolor_muscular, 'malaria').
+sintoma(fatiga, 'malaria').
+sintoma(anemia, 'malaria').
+sintoma(problemas_respiratorios, 'malaria').
+
+% sintomas de ladilla
+sintoma(picazon_en_el_vello_pubico, 'ladilla').
+sintoma(picazon_en_las_axilas, 'ladilla').
+sintoma(picazon_en_el_pecho, 'ladilla').
+sintoma(picazon_en_las_piernas, 'ladilla').
+sintoma(picazon_en_la_barba, 'ladilla').
+sintoma(irritacion_en_la_piel, 'ladilla').
+sintoma(manchas_azules, 'ladilla').
+sintoma(pequenas_heridas, 'ladilla').
+
+% tratamientos
+tratamiento(cancer_de_rinon,'cirugia para extirpar el tumor, radioterapia, quimioterapia e inmunoterapia').
+tratamiento(malaria, 'medicamento antipaludico').
+tratamiento(ladilla, 'medicamentos topicos, medicamentos orales').
+
+% recomendaciones alimenticias
+alimentacion(cancer_de_rinon,'consumir frutas, limitar grasas, limitar el sodio').
+alimentacion(malaria,'beber suficiente agua, limitar grasas trans, limitar el sodio').
+alimentacion(ladilla, 'beber mucha agua y comer bien').
+
+% medicos
+medico(cancer_de_rinon, 'oncologos y urologos').
+medico(malaria, 'infectologia e internista').
+medico(ladilla, 'dermatologo').
+
+% prevencion
+
+prevencion(cancer_de_rinon, 'no hay nada para prevenirlo').
+prevencion(malaria, 'evitar picaduras de mosquitos').
+prevencion(ladilla, 'mantener relaciones sexuales seguras').
+
+% region
+
+region(cancer_de_rinon,'no hay regiones especificas').
+region(malaria,'regiones tropicales, subtropicales, africa, sudeste asiatico, este mediterraneo y pacifico occidental').
+region(ladilla,'no hay regiones especificas').
+
+
+%explicacion
+explicacion(cancer_de_rinon, 'Es un cancer que se desarrolla en los rinones').
+explicacion(malaria, 'Es una enfermedad transmitida por mosquitos que causa fiebre y otros sintomas').
+explicacion(ladilla, 'Es una enfermedad de transmision sexual causada por piojos pubicos').
+
+```
 
 
