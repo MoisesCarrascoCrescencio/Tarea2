@@ -55,6 +55,12 @@ template([eliza, que, medico, me, puede, atender, si, tengo, Enfermedad], [R], [
     atom_concat(R2, Medico, R3),
     atom_concat(R3, '.', R).
 
+template([eliza, que, puedo, hacer, para, prevenir, Enfermedad], [R], []) :-
+    prevencion(Enfermedad, Medida),
+    atom_concat('', Medida, R1),
+    atom_concat(R1, ' para prevenir ', R2),
+    atom_concat(R2, Enfermedad, R3),
+    atom_concat(R3, '.', R).
 
 
 
@@ -99,10 +105,17 @@ alimentacion(cancer_de_rinon,'consumir frutas, limitar grasas, limitar el sodio'
 alimentacion(malaria,'beber suficiente agua, limitar grasas trans, limitar el sodio').
 alimentacion(ladilla, 'beber mucha agua y comer bien').
 
-%medicos
+% medicos
 medico(cancer_de_rinon, 'oncologos y urologos').
 medico(malaria, 'infectologia e internista').
 medico(ladilla, 'dermatologo').
+
+% prevencion
+
+prevencion(cancer_de_rinon, 'no hay nada para prevenirlo').
+prevencion(malaria, 'evitar picaduras de mosquitos').
+prevencion(ladilla, 'mantener relaciones sexuales seguras').
+
 
 
 
