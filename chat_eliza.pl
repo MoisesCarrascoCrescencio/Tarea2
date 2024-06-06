@@ -45,6 +45,25 @@ sintoma(dolor_de_espalda, 'cancer de rinon').
 sintoma(perdida_de_peso, 'cancer de rinon').
 sintoma(cansancio, 'cancer de rinon').
 
+% sintomas de malaria
+sintoma(fiebre, 'malaria').
+sintoma(escalofrios, 'malaria').
+sintoma(sudoracion, 'malaria').
+sintoma(dolor_de_cabeza, 'malaria').
+sintoma(dolor_muscular, 'malaria').
+sintoma(fatiga, 'malaria').
+sintoma(anemia, 'malaria').
+sintoma(problemas_respiratorios, 'malaria').
+
+% sintomas de ladilla
+sintoma(picazon_en_el_vello_pubico, 'ladilla').
+sintoma(picazon_en_las_axilas, 'ladilla').
+sintoma(picazon_en_el_pecho, 'ladilla').
+sintoma(picazon_en_las_piernas, 'ladilla').
+sintoma(picazon_en_la_barba, 'ladilla').
+sintoma(irritacion_en_la_piel, 'ladilla').
+sintoma(manchas_azules, 'ladilla').
+sintoma(pequenas_heridas, 'ladilla').
 
 
 % Hechos sobre padres e hijos
