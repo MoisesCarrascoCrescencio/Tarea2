@@ -69,6 +69,9 @@ template([eliza, en, que, region, puedo, contagiarme, de, Enfermedad], [R], []) 
     atom_concat(R2, Region, R3),
     atom_concat(R3, '.', R).
 
+template([eliza, que, es, Enfermedad], [R], []) :-
+    explicacion(Enfermedad, Explicacion),
+    atom_concat(Explicacion, '.', R).
 
 
 
@@ -127,6 +130,14 @@ prevencion(ladilla, 'mantener relaciones sexuales seguras').
 region(cancer_de_rinon,'no hay regiones especificas').
 region(malaria,'regiones tropicales, subtropicales, africa, sudeste asiatico, este mediterraneo y pacifico occidental').
 region(ladilla,'no hay regiones especificas').
+
+
+%explicacion
+explicacion(cancer_de_rinon, 'Es un cancer que se desarrolla en los rinones').
+explicacion(malaria, 'Es una enfermedad transmitida por mosquitos que causa fiebre y otros sintomas').
+explicacion(ladilla, 'Es una enfermedad de transmision sexual causada por piojos pubicos').
+
+
 
 
 % Hechos sobre padres e hijos
