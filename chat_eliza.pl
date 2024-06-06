@@ -33,6 +33,13 @@ template([eliza, tengo, X], [R], []) :-
     atom_concat('Tienes ', Enfermedad, R1),
     atom_concat(R1, '.', R).
 
+template([eliza, cual, es, el, tratamiento, para, Enfermedad], [R], []) :-
+    tratamiento(Enfermedad, Tratamiento),
+    atom_concat('El tratamiento para ', Enfermedad, R1),
+    atom_concat(R1, ' es ', R2),
+    atom_concat(R2, Tratamiento, R3),
+    atom_concat(R3, '.', R).
+
 
 
 
@@ -64,6 +71,12 @@ sintoma(picazon_en_la_barba, 'ladilla').
 sintoma(irritacion_en_la_piel, 'ladilla').
 sintoma(manchas_azules, 'ladilla').
 sintoma(pequenas_heridas, 'ladilla').
+
+% tratamientos
+tratamiento(cancer_de_rinon,'cirugia para extirpar el tumor, radioterapia, quimioterapia e inmunoterapia').
+tratamiento(malaria, 'medicamento antipaludico').
+tratamiento(ladilla, 'medicamentos topicos, medicamentos orales').
+
 
 
 % Hechos sobre padres e hijos
