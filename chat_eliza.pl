@@ -48,6 +48,14 @@ template([eliza, que, puedo, comer, si, tengo, Enfermedad], [R], []) :-
     atom_concat(R2, Enfermedad, R3),
     atom_concat(R3, '.', R).
 
+template([eliza, que, medico, me, puede, atender, si, tengo, Enfermedad], [R], []) :-
+    medico(Enfermedad, Medico),
+    atom_concat('El médico que te puede atender si tienes ', Enfermedad, R1),
+    atom_concat(R1, ' es un ', R2),
+    atom_concat(R2, Medico, R3),
+    atom_concat(R3, '.', R).
+
+
 
 
 
@@ -91,6 +99,10 @@ alimentacion(cancer_de_rinon,'consumir frutas, limitar grasas, limitar el sodio'
 alimentacion(malaria,'beber suficiente agua, limitar grasas trans, limitar el sodio').
 alimentacion(ladilla, 'beber mucha agua y comer bien').
 
+%medicos
+medico(cancer_de_rinon, 'oncologos y urologos').
+medico(malaria, 'infectologia e internista').
+medico(ladilla, 'dermatologo').
 
 
 
